@@ -62,44 +62,22 @@ class _mobileScreenLayoutState extends State<mobileScreenLayout> {
               icon: Container(
                 padding: EdgeInsets.symmetric(vertical: 4),
                 child: Icon(
-                  Icons.home,
+                  Icons.restaurant_menu,
                   color: _page == 0 ? blueColor  : secondaryColor,
                 )
               ), 
-              label: 'home', 
+              label: 'meals', 
               backgroundColor: primaryColor,
             ),
             BottomNavigationBarItem(
               icon: Container(
                 padding: EdgeInsets.symmetric(vertical: 4),
                 child: Icon(
-                  Icons.search,
+                  Icons.list,
                   color: _page == 1 ? blueColor  : secondaryColor,
                 )
               ), 
-              label: 'search', 
-              backgroundColor: primaryColor,
-            ),
-            BottomNavigationBarItem(
-              icon: Container(
-                padding: EdgeInsets.symmetric(vertical: 4),
-                child: Icon(
-                  Icons.add_circle,
-                  color: _page == 2 ? blueColor  : secondaryColor,
-                )
-              ), 
-              label: 'post', 
-              backgroundColor: primaryColor,
-            ),
-            BottomNavigationBarItem(
-              icon: Container(
-                padding: EdgeInsets.symmetric(vertical: 4),
-                child: Icon(
-                  Icons.favorite,
-                  color: _page == 3 ? blueColor  : secondaryColor,
-                )
-              ), 
-              label: 'liked', 
+              label: 'logs', 
               backgroundColor: primaryColor,
             ),
             BottomNavigationBarItem(
@@ -107,7 +85,7 @@ class _mobileScreenLayoutState extends State<mobileScreenLayout> {
                 padding: EdgeInsets.symmetric(vertical: 4),
                 child: Icon(
                   Icons.person,
-                  color: _page == 4 ? blueColor  : secondaryColor,
+                  color: _page == 2 ? blueColor  : secondaryColor,
                 )
               ), 
               label: 'profile', 

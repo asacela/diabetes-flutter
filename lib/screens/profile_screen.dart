@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:instagram_flutter/utils/colors.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -37,6 +38,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: mobileBackgroundColor,
+        centerTitle: false,
+        title: Image.asset('assets/diabetEats_logo_.png',
+          height: 40,
+        ),
+        actions: [
+        ],
+      ),
       body: Center(
         child: _userData != null
             ? Column(

@@ -7,7 +7,8 @@ class MealCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return GestureDetector( 
+      child: Container(
       color: mobileBackgroundColor,
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: FillImageCard(
@@ -19,6 +20,8 @@ class MealCard extends StatelessWidget {
         description: _content(color: textColor),
         color: cardColor,
       ),
+    ),
+      onTap: () {},
     );
   }
 

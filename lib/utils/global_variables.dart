@@ -7,6 +7,6 @@ const webScreenSize = 600;
 
 const homeScreenItems = [
           FeedScreen(),
-          Text('serach'),
+          MealLogScreen(),
           ProfileScreen(),
 ];

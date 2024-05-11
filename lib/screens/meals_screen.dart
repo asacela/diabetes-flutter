@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:instagram_flutter/utils/colors.dart';
+import 'package:instagram_flutter/widgets/add_meal_dialog.dart';
 import 'package:instagram_flutter/widgets/meal_card.dart';
 import 'package:instagram_flutter/widgets/text_field_input.dart';
 
@@ -39,34 +40,9 @@ class FeedScreen extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.all(48.0),
               child: Container(
-                width: 400,
+                width: 500,
                 height: 500,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    const Text(
-                      'Add Meal', // Text to be a heading
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold, // Make it bold
-                        fontSize: 20, // Increase font size
-                      ),
-                    ),
-                    const SizedBox(height: 15),
-                    TextFieldInput(
-                      hintText: 'Meal Name',
-                      textInputType: TextInputType.text,
-                      textEditingController: _mealNameController
-                    ),
-                    const SizedBox(height: 15),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Text('Close'),
-                    ),
-                  ],
-                ),
+                child: AddMealDialog(),
               ),
             ),
           ),

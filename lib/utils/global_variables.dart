@@ -10,3 +10,5 @@ const homeScreenItems = [
           MealLogScreen(),
           ProfileScreen(),
 ];
+
+const List<String> absorptionValues = <String>['Slow', 'Medium', 'Fast'];

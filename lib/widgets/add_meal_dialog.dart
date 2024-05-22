@@ -25,7 +25,13 @@ class _AddMealDialogState extends State<AddMealDialog> {
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        const SizedBox(height: 24),
+        Image(
+              image: NetworkImage('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=1160&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'),
+              width: 400,
+              height: 120,
+              fit: BoxFit.cover,
+        ),
+        const SizedBox(height: 12),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -40,11 +46,10 @@ class _AddMealDialogState extends State<AddMealDialog> {
                 inputSuffix: "carbs"),
           ],
         ),
-        const SizedBox(height: 24),
+        const SizedBox(height: 12),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            
             const Text(
               'Absorption Time: ', // Text to be a heading
               style: TextStyle(
@@ -53,7 +58,9 @@ class _AddMealDialogState extends State<AddMealDialog> {
                 color: secondaryColor, // Increase font size
               ),
             ),
-            SizedBox(width: MediaQuery.of(context).size.width * (4 / 12),),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * (5 / 12),
+            ),
             DropdownButton<String>(
               value: dropdownValue,
               items: absorptionValues
@@ -73,7 +80,7 @@ class _AddMealDialogState extends State<AddMealDialog> {
         ),
         const SizedBox(height: 24),
         SizedBox(
-          height: 175,
+          height: 150,
           child: CupertinoTextField(
             controller: _ingredientListController,
             placeholder: "Enter Ingredients",
@@ -91,7 +98,7 @@ class _AddMealDialogState extends State<AddMealDialog> {
         ),
         const SizedBox(height: 24),
         SizedBox(
-          height: 175,
+          height: 150,
           child: CupertinoTextField(
             controller: _recipeController,
             placeholder: "Enter Recipe",
@@ -113,7 +120,14 @@ class _AddMealDialogState extends State<AddMealDialog> {
             // Add your button onPressed logic here
             print('Button pressed');
           },
-          child: Text('Save Meal'),
+          child: Text(
+            'Save Meal',
+            style: TextStyle(
+              fontWeight: FontWeight.bold, // Example style properties
+              fontSize: 16, // Example style properties
+              color: blueColor, // Example color
+            ),
+          ),
         ),
       ],
     );

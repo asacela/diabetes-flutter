@@ -45,7 +45,7 @@ class FeedScreen extends StatelessWidget {
                       title: Text('Add Meal'),
                     ),
                     body: Padding(
-                        padding: EdgeInsets.all(24.0),
+                        padding: EdgeInsets.all(12.0),
                         child: AddMealDialog()
                     ),
                   ),

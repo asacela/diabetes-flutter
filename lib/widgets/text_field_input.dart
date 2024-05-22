@@ -53,10 +53,10 @@ class TextFieldInput extends StatelessWidget {
   double _calculateTextFieldWidth() {
     if (textInputType == TextInputType.number || textInputType == TextInputType.phone || textInputType == TextInputType.datetime) {
       // Set width for numeric input types
-      return 80.0; // You can adjust this value as needed
+      return 90.0; // You can adjust this value as needed
     } else {
       // Set default width for other input types
-      return 240.0; // You can adjust this value as needed
+      return 250.0; // You can adjust this value as needed
     }
   }
 }

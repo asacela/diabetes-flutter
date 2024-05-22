@@ -21,6 +21,7 @@ class TextFieldInput extends StatelessWidget {
     );
     
     return Container(
+      height: 35.0,
       width: textFieldWidth, // Set the width of the container
       child: TextField(
         controller: textEditingController,
@@ -44,7 +45,7 @@ class TextFieldInput extends StatelessWidget {
       return 70.0; // You can adjust this value as needed
     } else {
       // Set default width for other input types
-      return 220.0; // You can adjust this value as needed
+      return 250.0; // You can adjust this value as needed
     }
   }
 }

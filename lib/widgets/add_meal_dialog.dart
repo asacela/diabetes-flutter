@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:instagram_flutter/utils/colors.dart';
 import 'package:instagram_flutter/utils/global_variables.dart';
 import 'package:instagram_flutter/widgets/text_field_input.dart';
 
@@ -16,6 +18,7 @@ class _AddMealDialogState extends State<AddMealDialog> {
   Widget build(BuildContext context) {
     final TextEditingController _mealNameController = TextEditingController();
     final TextEditingController _carbAmountController = TextEditingController();
+    final TextEditingController _ingredientListController = TextEditingController();
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -32,7 +35,8 @@ class _AddMealDialogState extends State<AddMealDialog> {
         TextFieldInput(
             hintText: 'Meal Name',
             textInputType: TextInputType.text,
-            textEditingController: _mealNameController),
+            textEditingController: _mealNameController
+        ),
         const SizedBox(height: 15),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -79,6 +83,22 @@ class _AddMealDialogState extends State<AddMealDialog> {
           ],
         ),
         const SizedBox(height: 15),
+        SizedBox(
+          height: 200, 
+          child: CupertinoTextField(
+            controller: _ingredientListController,
+            placeholder: "Bad",
+            prefix: Text(
+              'Name',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            style: const TextStyle(fontWeight: FontWeight.w400, color: secondaryColor),
+            maxLines: 20,
+            decoration: BoxDecoration(),
+          ),
+        ),
         TextButton(
           onPressed: () {
             Navigator.pop(context);

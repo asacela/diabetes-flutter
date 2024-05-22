@@ -19,52 +19,41 @@ class _AddMealDialogState extends State<AddMealDialog> {
     final TextEditingController _mealNameController = TextEditingController();
     final TextEditingController _carbAmountController = TextEditingController();
     final TextEditingController _ingredientListController = TextEditingController();
+    final TextEditingController _recipeController = TextEditingController();
 
     return Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        const Text(
-          'Add Meal', // Text to be a heading
-          style: TextStyle(
-            fontWeight: FontWeight.bold, // Make it bold
-            fontSize: 20, // Increase font size
-          ),
-        ),
-        const SizedBox(height: 15),
-        TextFieldInput(
-            hintText: 'Meal Name',
-            textInputType: TextInputType.text,
-            textEditingController: _mealNameController
-        ),
-        const SizedBox(height: 15),
+        const SizedBox(height: 24),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const Text(
-              'Carbs Amount: ', // Text to be a heading
-              style: TextStyle(
-                fontWeight: FontWeight.bold, // Make it bold
-                fontSize: 12, // Increase font size
-              ),
-            ),
+            TextFieldInput(
+                hintText: 'Meal Name',
+                textInputType: TextInputType.text,
+                textEditingController: _mealNameController),
             TextFieldInput(
                 hintText: '(g)',
                 textInputType: TextInputType.number,
-                textEditingController: _carbAmountController),
+                textEditingController: _carbAmountController,
+                inputSuffix: "carbs"),
           ],
         ),
-        const SizedBox(height: 15),
+        const SizedBox(height: 24),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            
             const Text(
               'Absorption Time: ', // Text to be a heading
               style: TextStyle(
                 fontWeight: FontWeight.bold, // Make it bold
-                fontSize: 12, // Increase font size
+                fontSize: 12,
+                color: secondaryColor, // Increase font size
               ),
             ),
+            SizedBox(width: MediaQuery.of(context).size.width * (4 / 12),),
             DropdownButton<String>(
               value: dropdownValue,
               items: absorptionValues
@@ -82,28 +71,49 @@ class _AddMealDialogState extends State<AddMealDialog> {
             ),
           ],
         ),
-        const SizedBox(height: 15),
+        const SizedBox(height: 24),
         SizedBox(
-          height: 200, 
+          height: 175,
           child: CupertinoTextField(
             controller: _ingredientListController,
-            placeholder: "Bad",
-            prefix: Text(
-              'Name',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
+            placeholder: "Enter Ingredients",
+            style: const TextStyle(
+                fontWeight: FontWeight.w400, color: Colors.white),
+            maxLines: null,
+            textAlignVertical: TextAlignVertical.top, // Align text to the top
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Colors.grey,
               ),
+              borderRadius: BorderRadius.circular(10), // Add rounded corners
             ),
-            style: const TextStyle(fontWeight: FontWeight.w400, color: secondaryColor),
-            maxLines: 20,
-            decoration: BoxDecoration(),
           ),
         ),
-        TextButton(
+        const SizedBox(height: 24),
+        SizedBox(
+          height: 175,
+          child: CupertinoTextField(
+            controller: _recipeController,
+            placeholder: "Enter Recipe",
+            style: const TextStyle(
+                fontWeight: FontWeight.w400, color: Colors.white),
+            maxLines: null,
+            textAlignVertical: TextAlignVertical.top, // Align text to the top
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Colors.grey,
+              ),
+              borderRadius: BorderRadius.circular(10), // Add rounded corners
+            ),
+          ),
+        ),
+        SizedBox(height: 24), // Add spacing between text field and button
+        ElevatedButton(
           onPressed: () {
-            Navigator.pop(context);
+            // Add your button onPressed logic here
+            print('Button pressed');
           },
-          child: const Text('Close'),
+          child: Text('Save Meal'),
         ),
       ],
     );

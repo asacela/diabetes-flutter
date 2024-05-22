@@ -8,11 +8,8 @@ import 'package:instagram_flutter/widgets/text_field_input.dart';
 class FeedScreen extends StatelessWidget {
   const FeedScreen({super.key});
 
-  
-
   @override
   Widget build(BuildContext context) {
-
     final TextEditingController _mealNameController = TextEditingController();
     return Scaffold(
       appBar: AppBar(
@@ -34,19 +31,29 @@ class FeedScreen extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => showDialog<String>(
-          context: context,
-          builder: (BuildContext context) => Dialog(
-            child: Padding(
-              padding: EdgeInsets.all(48.0),
-              child: Container(
-                width: 500,
-                height: 500,
-                child: AddMealDialog(),
-              ),
-            ),
-          ),
-        ),
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return Dialog(
+                insetPadding: EdgeInsets.all(0), // Removes default padding
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height,
+                  child: Scaffold(
+                    appBar: AppBar(
+                      title: Text('Add Meal'),
+                    ),
+                    body: Padding(
+                        padding: EdgeInsets.all(24.0),
+                        child: AddMealDialog()
+                    ),
+                  ),
+                ),
+              );
+            },
+          );
+        },
         child: const Icon(Icons.add),
         backgroundColor: blueColor,
       ),

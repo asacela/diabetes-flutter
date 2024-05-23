@@ -1,7 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:instagram_flutter/screens/login_screen.dart';
 import 'package:instagram_flutter/utils/colors.dart';
+import 'package:instagram_flutter/resources/auth_method.dart';
+import 'package:instagram_flutter/utils/utils.dart';
+
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -14,11 +18,37 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   User? _currentUser;
   Map<String, dynamic>? _userData; // To store additional user data
+    bool _isLoading = false;
+
 
   @override
   void initState() {
     super.initState();
     _getCurrentUser();
+  }
+
+    void logout() async {
+
+    setState(() {
+      _isLoading = true;
+    });
+
+    String res = await AuthMethods().logoutUser();
+  
+    if(res == "success"){
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute( 
+        builder: (context) => 
+          LoginScreen(),
+        ),
+      );
+    } else {
+      showSnackBar(res, context);
+    }
+
+    setState(() {
+      _isLoading = false;
+    });
   }
 
   Future<void> _getCurrentUser() async {
@@ -75,12 +105,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
                   SizedBox(height: 20),
-                  ElevatedButton(
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+
+                      ElevatedButton(
                     onPressed: () {
                       // Add functionality here, such as navigating to edit profile screen
                     },
                     child: Text('Edit Profile'),
                   ),
+                  SizedBox(width: 10),
+                     ElevatedButton(
+                    onPressed: (logout),
+                    child: Text('Sign Out'),
+                  ),
+
+                    ],
+                  ),
+                  
                 ],
               )
             : CircularProgressIndicator(), // Show loading indicator if user data is being fetched

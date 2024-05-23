@@ -81,7 +81,9 @@ class _LoginScreenState extends State<LoginScreen> {
               // svg image
 
               const SizedBox(height: 12,),
-              SvgPicture.asset('assets/ic_instagram.svg', color: primaryColor, height: 64, ),
+              Image.asset('assets/diabetEats_logo_.png',
+                height: 40,
+              ),
 
               const SizedBox(height: 64,),
 

@@ -25,11 +25,47 @@ class _AddMealDialogState extends State<AddMealDialog> {
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Image(
-              image: NetworkImage('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=1160&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'),
-              width: 400,
-              height: 120,
+        SizedBox(height: 20),
+        Container(
+          height: 120.0,
+          width: 400.0,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(30),
+            image: DecorationImage(
+              image: NetworkImage(
+                  'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=1160&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'),
               fit: BoxFit.cover,
+            ),
+            shape: BoxShape.rectangle,
+          ),
+          child: Stack(
+            children: [
+              Align(
+                alignment: Alignment.bottomRight,
+                child: Padding(
+                  padding: const EdgeInsets.all(
+                      8.0), // Add some padding if necessary
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(
+                        36.0), // Set the desired border radius
+                    child: Container(
+                      width: 48.0, // Same width as default FAB divided bby 2
+                      height: 48.0, // Same height as default FAB divided bby 2
+                      child: FloatingActionButton(
+                        onPressed: () {},
+                        child: const Icon(Icons.edit),
+                        backgroundColor:
+                            Colors.blue, // Replace with your secondaryColor
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                                16.0)), // Ensure shape matches the ClipRRect
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
         const SizedBox(height: 12),
         Row(

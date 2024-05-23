@@ -21,6 +21,7 @@ class _MealLogScreenState extends State<MealLogScreen> {
         ),
         actions: [
         ],
+        automaticallyImplyLeading: false,
       ),
       body: ListView(
         children: [

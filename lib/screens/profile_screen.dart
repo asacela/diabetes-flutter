@@ -76,6 +76,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
         actions: [
         ],
+        automaticallyImplyLeading: false,
       ),
       body: Center(
         child: _userData != null

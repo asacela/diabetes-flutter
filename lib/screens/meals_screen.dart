@@ -20,6 +20,7 @@ class FeedScreen extends StatelessWidget {
           height: 40,
         ),
         actions: [],
+        automaticallyImplyLeading: false,
       ),
       body: ListView(
         children: [

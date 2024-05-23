@@ -1,8 +1,12 @@
+import 'dart:typed_data';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram_flutter/utils/colors.dart';
 import 'package:instagram_flutter/utils/global_variables.dart';
+import 'package:instagram_flutter/utils/utils.dart';
 import 'package:instagram_flutter/widgets/text_field_input.dart';
+import 'package:image_picker/image_picker.dart';
 
 class AddMealDialog extends StatefulWidget {
   const AddMealDialog({super.key});
@@ -13,12 +17,21 @@ class AddMealDialog extends StatefulWidget {
 
 class _AddMealDialogState extends State<AddMealDialog> {
   String dropdownValue = absorptionValues.first;
+  Uint8List? _image;
+
+  void selectImage() async {
+    Uint8List im = await pickImage(ImageSource.gallery);
+    setState(() {
+      _image = im;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     final TextEditingController _mealNameController = TextEditingController();
     final TextEditingController _carbAmountController = TextEditingController();
-    final TextEditingController _ingredientListController = TextEditingController();
+    final TextEditingController _ingredientListController =
+        TextEditingController();
     final TextEditingController _recipeController = TextEditingController();
 
     return Column(
@@ -32,8 +45,10 @@ class _AddMealDialogState extends State<AddMealDialog> {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(30),
             image: DecorationImage(
-              image: NetworkImage(
-                  'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=1160&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'),
+              image: _image != null
+                  ? MemoryImage(_image!) as ImageProvider
+                  : NetworkImage(
+                      'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=1160&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'),
               fit: BoxFit.cover,
             ),
             shape: BoxShape.rectangle,
@@ -52,7 +67,7 @@ class _AddMealDialogState extends State<AddMealDialog> {
                       width: 48.0, // Same width as default FAB divided bby 2
                       height: 48.0, // Same height as default FAB divided bby 2
                       child: FloatingActionButton(
-                        onPressed: () {},
+                        onPressed: (selectImage),
                         child: const Icon(Icons.edit),
                         backgroundColor:
                             Colors.blue, // Replace with your secondaryColor

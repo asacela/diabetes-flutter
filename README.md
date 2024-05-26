@@ -1,4 +1,4 @@
-# instagram_flutter
+# Diabetes Flutter
 
 A new Flutter project.
 

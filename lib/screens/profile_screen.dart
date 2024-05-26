@@ -18,7 +18,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   User? _currentUser;
   Map<String, dynamic>? _userData; // To store additional user data
-    bool _isLoading = false;
+  bool _isLoading = false;
 
 
   @override

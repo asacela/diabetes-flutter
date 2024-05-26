@@ -1,50 +1,51 @@
 import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:instagram_flutter/models/post.dart';
+import 'package:instagram_flutter/models/meal.dart';
 import 'package:instagram_flutter/resources/storage_methods.dart';
 import 'package:uuid/uuid.dart';
 
 class FirestoreMethods {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  // upload post
-  Future<String> uploadPost(
-    String description,
-    Uint8List file,
+  // upload meal
+  Future<String> uploadMeal(
     String uid,
-    String username,
-    String profImage
+    String title,
+    Uint8List file,
+    String carbs,
+    String ingredientList,
+    String recipe,
+    String absorptionTime,
   ) async {
+    print("Uploading meal!");
 
     String res = "some error occurred";
     try {
+      String photoUrl = await StorageMethods().uploadImageToStorage("meals", file, true);
 
-      String photoUrl = await StorageMethods().uploadImageToStorage("posts", file, true);
-
-      String postId = const Uuid().v1();
-      Post post = Post(
-        description: description,
+      String mealId = const Uuid().v1();
+      Meal meal = Meal(
         uid: uid,
-        username: username,
-        postId: postId,
-        datePublished: DateTime.now(),
-        postUrl: photoUrl,
-        profImage: profImage,
-        likes: [],
+        title: title,
+        carbs: carbs,
+        photoUrl: photoUrl,
+        ingredientList: ingredientList,
+        recipe: recipe,
+        absorptionTime: absorptionTime,
+        liked: false,
       );
 
-      _firestore.collection('posts').doc(postId).set(
-        post.toJson(),
-        );
-        res = "success";
-    } catch(err) {
+      // Save the meal under the user's uid sub-collection
+      await _firestore.collection('users').doc(uid).collection('meals').doc(mealId).set(
+        meal.toJson(),
+      );
 
+      res = "success";
+    } catch (err) {
       res = err.toString();
-
-
-
     }
+
     return res;
   }
 }

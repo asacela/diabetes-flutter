@@ -73,11 +73,11 @@ class _mobileScreenLayoutState extends State<mobileScreenLayout> {
               icon: Container(
                 padding: EdgeInsets.symmetric(vertical: 4),
                 child: Icon(
-                  Icons.list,
+                  Icons.photo_camera,
                   color: _page == 1 ? blueColor  : secondaryColor,
                 )
               ), 
-              label: 'logs', 
+              label: 'carb cam', 
               backgroundColor: primaryColor,
             ),
             BottomNavigationBarItem(

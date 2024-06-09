@@ -20,12 +20,16 @@ class _CarbCamScreenState extends State<CarbCamScreen> {
   Uint8List? _image;
   bool _isGenerated = false;
   bool _isLoading = false;
-  String? jsonResponse;
+  Map<String, dynamic>? jsonResponse;
 
   void selectImage() async {
     Uint8List im = await pickImage(ImageSource.gallery);
     setState(() {
       _image = im;
+
+      if (_isGenerated == true){
+        _isGenerated = false;
+      }
     });
   }
 
@@ -78,7 +82,7 @@ class _CarbCamScreenState extends State<CarbCamScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 24),
+            SizedBox(height: 12.0),
             Stack(
               children: [
                 Container(
@@ -102,7 +106,7 @@ class _CarbCamScreenState extends State<CarbCamScreen> {
                   child: Container(
                     height: 40,
                     width: 160,
-                    child: FloatingActionButton(
+                    child: !_isGenerated ? FloatingActionButton(
                       backgroundColor: blueColor,
                       onPressed: () {
                         // Handle FAB press
@@ -141,14 +145,13 @@ class _CarbCamScreenState extends State<CarbCamScreen> {
                               ),
                         padding: EdgeInsets.all(8.0),
                       ),
-                    ),
+                    ) : Container(),
                   ),
                 ),
               ],
             ),
             SizedBox(height: 24),
-            _isGenerated ? GeneratedMealInfoCard(jsonMealContent: jsonResponse) :
-            SizedBox(),
+            _isGenerated && jsonResponse != null ? GeneratedMealInfoCard(jsonMealContent: jsonResponse!) : SizedBox(),
           ],
         ),
       ),

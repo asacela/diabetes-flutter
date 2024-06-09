@@ -7,9 +7,9 @@ import 'package:dio/dio.dart';
 class OpenAI_Methods {
   final dio = Dio();
 
-  Future<String> sendImageToGPT4Vision( 
+  Future<Map<String, dynamic>> sendImageToGPT4Vision(
       {required Uint8List file,
-      int maxTokens = 50,
+      int maxTokens = 100,
       String model = "gpt-4-vision-preview"}) async {
     final String base64Image = await encodeImage(file);
     try {
@@ -34,7 +34,7 @@ class OpenAI_Methods {
                 {
                   'type': 'text',
                   'text':
-                      'GPT, your task is to estimate the total carbohydrates in a meal. Analyze any image of food or meals I provide, and give a estimation of the carbs in the meal. Simply give me a json string with a breakdown of the carb estimation.',
+                      'GPT, your task is to estimate the total carbohydrates in a meal. Analyze any image of food or meals I provide, and give an estimation of the carbs in the meal. Estimate total carbohydrates in a meal from an image. Provide JSON with meal name and total carbohydrates: {"meal": {"name": "<meal_name>", "total_carbohydrates": <total_carbohydrates>}}. Do not include a warning, because the user is already aware.'
                 },
                 {
                   'type': 'image_url',
@@ -48,14 +48,18 @@ class OpenAI_Methods {
           'max_tokens': maxTokens,
         }),
       );
-
+      print("getting generated meal...");
       final jsonResponse = response.data;
-      print(jsonResponse);
+      final String jsonContent = jsonResponse["choices"][0]["message"]["content"];
+      int startIndex = jsonContent.indexOf('{');
+      int endIndex = jsonContent.lastIndexOf('}') + 1; // Add 1 to include the closing brace
+      String mealJson = jsonContent.substring(startIndex, endIndex);
+      Map<String, dynamic> jsonMap = json.decode(mealJson);
 
       if (jsonResponse['error'] != null) {
         throw HttpException(jsonResponse['error']["message"]);
       }
-      return jsonResponse["choices"][0]["message"]["content"];
+      return jsonMap;
     } catch (e) {
       throw Exception("error: $e");
     }

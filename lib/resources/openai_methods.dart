@@ -71,11 +71,11 @@ class OpenAI_Methods {
   // Generate ai meal
   Future<Map<String, dynamic>> sendPromptToGPT4(
       {required String mealPrompt,
-      int maxTokens = 100,
+      int maxTokens = 200,
       String model = "gpt-4-vision-preview"}) async {
     try {
 
-      String fullPrompt = 'GPT, your task is to generate a low-carb meal for a diabetic patient. Make sure the meal has around 130 carbs or less. Generate the closest meal possible to the given user prompt: ${mealPrompt}Provide a JSON with the following format: {"title":"<title>","carbs":<number>,"ingredientList":["<ingredient_1>","<ingredient_2>","<ingredient_3>"],"recipe":"<recipe>","absorptionTime":"slow|medium|fast"}';
+      String fullPrompt = 'GPT, your task is to generate a low-carb meal for a diabetic patient. Make sure the meal has around 130 carbs or less. Generate a carb estimate, ingredient list, and recipe for the low-carb version of a meal with this title: ${mealPrompt}. Also, make the recipe concise. Provide a JSON with the following format: {"title":<title>,"carbs":<number>,"ingredientList":["<ingredient_1>\n<ingredient_2>\n<ingredient_3>"],"recipe":"<recipe>","absorptionTime":"<slow|medium|fast>"}';
       
 
       final response = await dio.post(
@@ -110,10 +110,12 @@ class OpenAI_Methods {
       final jsonResponse = response.data;
       final String jsonContent =
           jsonResponse["choices"][0]["message"]["content"];
+      print(jsonContent);
       int startIndex = jsonContent.indexOf('{');
       int endIndex = jsonContent.lastIndexOf('}') +
           1; // Add 1 to include the closing brace
       String mealJson = jsonContent.substring(startIndex, endIndex);
+      print(mealJson);
       Map<String, dynamic> jsonMap = json.decode(mealJson);
 
       if (jsonResponse['error'] != null) {

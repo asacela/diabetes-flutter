@@ -53,14 +53,23 @@ class _AddMealDialogState extends State<AddMealDialog> {
     });
   }
 
-    void getMealGeneration() async {
+  void getMealGeneration() async {
+    setState(() {
+       _isLoading = true;
+    });
     try {
-      final res = await OpenAI_Methods().sendPromptToGPT4(mealPrompt: _mealNameController.text);
+      final res = await OpenAI_Methods()
+          .sendPromptToGPT4(mealPrompt: _mealNameController.text);
 
       setState(() {
-        jsonResponse = res;
+        _mealNameController.text = res["title"];
+        _carbAmountController.text = res["carbs"].toString();
+        _ingredientListController.text = res["ingredientList"];
+        _recipeController.text = res["recipe"];
+        _absorptionController.text = res["absorptionTime"];
         _isGenerated = true;
         _isLoading = false;
+       
       });
     } catch (error) {
       print(error.toString());
@@ -267,19 +276,32 @@ class _AddMealDialogState extends State<AddMealDialog> {
                       shadowColor: Colors.black, // Shadow color
                       elevation: 5, // Elevation
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30.0), // Rounded corners
+                        borderRadius:
+                            BorderRadius.circular(30.0), // Rounded corners
                       ),
                     ),
                     child: Row(children: [
-                      Text(
-                        'Generate Meal ',
-                        style: TextStyle(
-                          fontWeight:
-                              FontWeight.bold, // Example style properties
-                          fontSize: 16, // Example style properties
-                          color: primaryColor, // Example color
-                        ),
-                      ),
+                      !_isLoading
+                          ? Text(
+                              'Generate Meal',
+                              style: TextStyle(
+                                fontWeight:
+                                    FontWeight.bold, // Example style properties
+                                fontSize: 16, // Example style properties
+                                color: primaryColor, // Example color
+                              ),
+                            )
+                          : const Center(
+                              child: SizedBox(
+                              child: Center(
+                                child: CircularProgressIndicator(
+                                  color: primaryColor,
+                                ),
+                              ),
+                              height: 20.0,
+                              width: 20.0,
+                            )),
+                            SizedBox(width: 2.0),
                       Icon(
                         Icons.auto_awesome,
                         color: primaryColor,

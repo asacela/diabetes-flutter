@@ -69,7 +69,6 @@ class _AddMealDialogState extends State<AddMealDialog> {
         _absorptionController.text = res["absorptionTime"];
         _isGenerated = true;
         _isLoading = false;
-       
       });
     } catch (error) {
       print(error.toString());

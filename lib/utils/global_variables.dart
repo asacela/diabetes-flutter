@@ -14,4 +14,3 @@ const homeScreenItems = [
 const List<String> absorptionValues = <String>['Slow', 'Medium', 'Fast'];
 
 String OPENAI_BASE_URL = "https://api.openai.com/v1";
-String OPENAI_API_KEY = "sk-proj-oOMzJwLEz8nGoBMe2YNHT3BlbkFJi4txlYaz6l8ywsHPX256";
